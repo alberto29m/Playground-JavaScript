@@ -162,20 +162,57 @@ For example, if I call:
 It will create an HTML table with 4 rows
 and 8 columns, and append it after the level 1 heading.*/
 
-function addMultTable(rows, cols){
-    var table1 = document.createElement("table");
+/*function addMultTable(rows, cols){
+    var body = document.getElementsByTagName("body")[0];
+    var t = document.createElement("div");
+    var tBody = document.createElement("table");
     for(var i = 0; i < rows; i++){
-        var tr = document.createElement("rows");
-        table1.appendChild(tr);
+        var tr = document.createElement("tr"); 
         for(j = 0; j < cols; j++){
-            var td = document.createElement("columns");
+            var td = document.createElement("td");
+            var textCell = document.createTextNode ("hola");
             tr.appendChild(td);
+            td.appendChild(textCell);
+            tr.setAttribute("border", "2");
+            td.setAttribute("border", "2");
         }
+        tBody.appendChild(tr);
+    } 
+    t.appendChild(tBody);
+    body.appendChild(t);
+    tBody.setAttribute("border", "2");
+}*/
+function addMultTable(rows, cols){
+    var body = document.getElementsByTagName("body")[0];
+    var t = document.createElement("div");
+    var tBody = document.createElement("table");
+    var tr0 = document.createElement("tr")
+    for(var i=0; i<cols; i++ ){
+        var td0 = document.createElement("td")
+        var textCell = document.createTextNode (i);
+        td0.appendChild(textCell);
+        tr0.appendChild(td0);
     }
-    
+    tBody.appendChild(tr0);
+    for( var j=0; j<rows-1; j++){
+        var tr = document.createElement("tr");
+            var td= document.createElement("td");
+            tr.appendChild(td);
+        td.textContent = j+1;
+        for(var l=0; l< cols-1; l++){
+            var td2= document.createElement("td");
+            var textCell = document.createTextNode((l+1) * (j+1));
+            tr.appendChild(td2);
+            td2.appendChild(textCell);
+        }
+        tBody.appendChild(tr);
+    }
+       
+    body.appendChild(t);
+    t.appendChild(tBody);
+    tBody.setAttribute("border", "2");
 }
 addMultTable(4,8)
-
 
 
 
